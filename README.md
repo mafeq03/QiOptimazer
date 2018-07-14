@@ -3,3 +3,4 @@ Second Project created during Ironhack's part time web development cohort of 201
 
 The app aims to bring awareness, education, and an oriental natural alternative to ailments. 
 
+
