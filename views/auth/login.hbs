@@ -1,0 +1,29 @@
+<h2>Log In</h2>
+<p>Welcome back</p>
+
+{{#if errorMessage}}
+  <p class="error-message">
+    {{ errorMessage }}
+  </p>
+{{/if}}
+
+<form action="/login" method="post">
+  <div>
+    <label for="email-input"> Email </label>
+    <input type="email" name="email" id="email-input" placeholder="your email">
+  </div>
+
+  <div>
+    <label for="password-input"> Password </label>
+    <input type="password" name="password" id="password-input" placeholder="your secret code">
+  </div>
+
+  <button> Log In </button>
+</form>
+
+<p>
+  Haven't joined yet?
+  <a href="/signup">
+  Don't hesitate any longer.
+  </a>
+</p>

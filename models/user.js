@@ -4,10 +4,13 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema ({
   name: String,
   email: String, 
+  username: String,
   picture: {
     type: String, 
-    default: '',
+    default: '../images/cats.jpg',
   },
+  facebookID: String,
+  googleID: String,
   role: {
     type: String,
     enum: ['User', 'Admin', 'Expert']

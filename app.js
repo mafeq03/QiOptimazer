@@ -10,7 +10,14 @@ const logger       = require('morgan');
 const path         = require('path');
 const bcrypt       = require("bcrypt");
 const saltRounds   = 10;
-
+const session      = require('express-session');
+const MongoStore   = require('connect-mongo')(session);
+const multer       = require('multer');
+const FbStrategy   = require('passport-facebook').Strategy;
+const passport     = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const flash         = require("connect-flash");
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 mongoose.Promise = Promise;
 mongoose
@@ -46,15 +53,84 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+passport.serializeUser((user, cb) => {
+  cb(null, user._id);
+});
 
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+app.use(flash());
+//FB log in
+passport.use(new FbStrategy({
+  clientID: "843986969132392",
+  clientSecret: "8b10b3ce3cd31646467869ce62ea5d47",
+  callbackURL: "/auth/facebook/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOne({ facebookID: profile.id }, (err, user) => {
+    if (err) {
+      return done(err);
+    }
+    if (user) {
+      return done(null, user);
+    }
+
+    const newUser = new User({
+      facebookID: profile.id
+    });
+
+    newUser.save((err) => {
+      if (err) {
+        return done(err);
+      }
+      done(null, newUser);
+    });
+  });
+
+}));
+
+//Google log in
+passport.use(new GoogleStrategy({
+  clientID: "839319041498-ruuh5uju3hr4kd2gsib4209r8pmkttlo.apps.googleusercontent.com",
+  clientSecret: "n0EHjd_q4V9XIrQuelG--AOH",
+  callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOne({ googleID: profile.id }, (err, user) => {
+    if (err) {
+      return done(err);
+    }
+    if (user) {
+      return done(null, user);
+    }
+
+    const newUser = new User({
+      googleID: profile.id
+    });
+
+    newUser.save((err) => {
+      if (err) {
+        return done(err);
+      }
+      done(null, newUser);
+    });
+  });
+
+}));
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
+app.locals.title = 'QiOptimazer';
 
 
 const index = require('./routes/index');
 app.use('/', index);
+
+const authRoutes = require('./routes/auth-routes');
+app.use('/', authRoutes);
+
 
 
 module.exports = app;
