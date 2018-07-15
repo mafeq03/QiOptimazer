@@ -17,11 +17,12 @@ const FbStrategy   = require('passport-facebook').Strategy;
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash         = require("connect-flash");
+const User     = require('./models/user');
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/qioptimazer', {useMongoClient: true})
+  .connect('mongodb://localhost/qioptimizer', {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -65,6 +66,7 @@ passport.deserializeUser((id, cb) => {
 });
 
 app.use(flash());
+
 //FB log in
 passport.use(new FbStrategy({
   clientID: "843986969132392",
@@ -121,12 +123,17 @@ passport.use(new GoogleStrategy({
 
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // default value for title local
-app.locals.title = 'QiOptimazer';
+app.locals.title = 'QiOptimizer';
 
 
 const index = require('./routes/index');
 app.use('/', index);
+
 
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);

@@ -5,6 +5,7 @@ const userSchema = new Schema ({
   name: String,
   email: String, 
   username: String,
+  password: String,
   picture: {
     type: String, 
     default: '../images/cats.jpg',

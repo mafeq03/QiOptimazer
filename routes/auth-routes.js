@@ -11,7 +11,7 @@ const multer   = require('multer');
 //Facebook Login
 router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/welcome-page",
+  successRedirect: "/welcome",
   failureRedirect: "/"
 }));
 
@@ -23,7 +23,7 @@ router.get("/auth/google", passport.authenticate("google", {
 
 router.get("/auth/google/callback", passport.authenticate("google", {
   failureRedirect: "/",
-  successRedirect: "/welcome-page"
+  successRedirect: "/welcome"
 }));
 
 router.get('/signup', (req, res, next) => {
@@ -117,14 +117,14 @@ router.post('/login', (req, res, next) => {
       return;
     }
 
-    req.session.currentUser = theUser;
-    res.redirect('/');
+    // req.session.currentUser = theUser;
+    res.redirect('/welcome');
   });
 });
 
 router.get('/logout', (req, res, next) => {
   if (!req.session.currentUser) {
-    res.redirect('/');
+    res.redirect('/logout');
     return;
   }
 
@@ -134,7 +134,7 @@ router.get('/logout', (req, res, next) => {
       return;
     }
 
-    res.redirect('/');
+    res.redirect('/logout');
   });
 });
 
