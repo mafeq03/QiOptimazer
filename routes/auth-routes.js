@@ -15,17 +15,6 @@ router.get("/auth/facebook/callback", passport.authenticate("facebook", {
   failureRedirect: "/"
 }));
 
-//Google Login
-router.get("/auth/google", passport.authenticate("google", {
-  scope: ["https://www.googleapis.com/auth/plus.login",
-          "https://www.googleapis.com/auth/plus.profile.emails.read"]
-}));
-
-router.get("/auth/google/callback", passport.authenticate("google", {
-  failureRedirect: "/",
-  successRedirect: "/welcome"
-}));
-
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup', {
     errorMessage: ''

@@ -19,7 +19,7 @@ router.get('/home', (req, res, next) => {
 
 //Welcome Page
 router.get('/welcome', (req, res, next) => {
-  res.render('../views/initial/welcome-page.hbs');
+  res.render('../views/initial/welcome-page.hbs' );
 });
 
 //Learn more about

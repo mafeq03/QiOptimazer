@@ -11,8 +11,7 @@ const userSchema = new Schema ({
     default: '../images/cats.jpg',
   },
   facebookID: String,
-  googleID: String,
-  role: {
+   role: {
     type: String,
     enum: ['User', 'Admin', 'Expert']
   }
