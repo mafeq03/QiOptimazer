@@ -15,6 +15,7 @@ router.get("/auth/facebook/callback", passport.authenticate("facebook", {
   failureRedirect: "/"
 }));
 
+//Route to signup
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup', {
     errorMessage: ''
@@ -74,8 +75,9 @@ router.post('/signup', (req, res, next) => {
   });
 });
 
+//Route to log in and redirect to welcome page
 router.get('/login', (req, res, next) => {
-  res.render('auth/login', {
+   res.render('auth/login', {
     errorMessage: 'Incorrect username or password'
   });
 });
@@ -105,14 +107,16 @@ router.post('/login', (req, res, next) => {
       });
       return;
     }
-
     // req.session.currentUser = theUser;
+    //once logged in it takes you to welcome page
     res.redirect('/welcome');
   });
 });
 
+//Route to logout
 router.get('/logout', (req, res, next) => {
-  if (!req.session.currentUser) {
+   if (!req.session.currentUser) {
+     //Logout page 
     res.redirect('/logout');
     return;
   }

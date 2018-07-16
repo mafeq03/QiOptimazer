@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Herb = require('../models/herbs');
+const dbName = 'qioptimizer';
 
-const dbtitle = 'QiLibrary';
-mongoose.connect(`mongo://localhost/${dbtitle}`);
+mongoose.connect(`mongo://localhost/${dbName}`);
 Herb.collection.drop();
 
 const herbs = [
@@ -60,6 +60,6 @@ const herbs = [
 
 Herb.create(herbs, (err) =>{
   if(err) {throw(err)}
-  console.log(`Created ${herbs.length} herbs`)
+  console.log(`Created ${herbs.length} herbs`);
   mongoose.connection.close();
 });

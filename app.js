@@ -95,37 +95,6 @@ passport.use(new FbStrategy({
 
 }));
 
-//Google log in
-passport.use(new GoogleStrategy({
-  clientID: "839319041498-ruuh5uju3hr4kd2gsib4209r8pmkttlo.apps.googleusercontent.com",
-  clientSecret: "n0EHjd_q4V9XIrQuelG--AOH",
-  callbackURL: "/auth/google/callback"
-}, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ googleID: profile.id }, (err, user) => {
-    if (err) {
-      return done(err);
-    }
-    if (user) {
-      return done(null, user);
-    }
-
-    const newUser = new User({
-      googleID: profile.id
-    });
-
-    newUser.save((err) => {
-      if (err) {
-        return done(err);
-      }
-      done(null, newUser);
-    });
-  });
-
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 
 // default value for title local
 app.locals.title = 'QiOptimizer';
