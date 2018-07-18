@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const otherSchema = new Schema({
   name: String,
   description: String,
+  image: String,
   symptoms: String,
   reviews:[
     {

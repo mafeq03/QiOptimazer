@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Herb = require('../models/herbs');
-const dbName = 'qioptimizer';
 
-mongoose.connect(`mongo://localhost/${dbName}`);
-Herb.collection.drop();
+const dbName = 'qioptimizer';
+mongoose.connect(`mongodb://localhost/${dbName}`, {useMongoClient: true});
+
+// Herb.collection.drop();
 
 const herbs = [
   {name: 'Ginseng',
