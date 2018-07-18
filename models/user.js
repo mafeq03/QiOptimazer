@@ -6,9 +6,10 @@ const userSchema = new Schema ({
   email: String, 
   username: String,
   password: String,
-  picture: {
+  location: String,
+  profilePic: {
     type: String, 
-    default: '../images/cats.jpg',
+    default: 'http://wwwicon-art.info/wp-content/uploads/2017-cheshire-yin-yang-cats-etsy-portraits-of-delicate-cat-yin-yang.jpg',
   },
   facebookID: String,
    role: {
