@@ -16,18 +16,20 @@ router.get("/auth/facebook/callback", passport.authenticate("facebook", {
 }));
 
 //Route to signup
+//Display the Signup Form
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup', {
     errorMessage: ''
   });
 });
-
+//Sign up Post Route to create User
 router.post('/signup', (req, res, next) => {
   const nameInput = req.body.name;
   const emailInput = req.body.email;
   const usernameInput = req.body.username;
+  const locationInput = req.body.location;
   const passwordInput = req.body.password;
-  const pictureInput = req.body.picture;
+  const profilePicInput = req.body.profilePic;
 
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/signup', {
@@ -41,36 +43,32 @@ router.post('/signup', (req, res, next) => {
       next(err);
       return;
     }
-
     if (existingUser !== null) {
       res.render('auth/signup', {
         errorMessage: `The email ${emailInput} is already in use.`
       });
       return;
     }
-
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashedPass = bcrypt.hashSync(passwordInput, salt);
 
-    const userSubmission = {
+    const newUser = new User({
       name: nameInput,
       email: emailInput,
       username: usernameInput,
+      location: locationInput,
       password: hashedPass,
-      picture: pictureInput
-    };
+      profilePic: profilePicInput
+    });
 
-    const theUser = new User(userSubmission);
-
-    theUser.save((err) => {
+    newUser.save((err) => {
       if (err) {
         res.render('auth/signup', {
           errorMessage: 'Something went wrong. Try again later.'
         });
         return;
       }
-
-      res.redirect('/');
+      res.redirect('/login');
     });
   });
 });
@@ -81,7 +79,7 @@ router.get('/login', (req, res, next) => {
     errorMessage: 'Incorrect username or password'
   });
 });
-
+//Post route to log in and create session
 router.post('/login', (req, res, next) => {
   const emailInput = req.body.email;
   const passwordInput = req.body.password;
@@ -120,17 +118,14 @@ router.get('/logout', (req, res, next) => {
     res.redirect('/logout');
     return;
   }
-
   req.session.destroy((err) => {
     if (err) {
       next(err);
       return;
     }
-
     res.redirect('/logout');
   });
 });
-
 
 
 

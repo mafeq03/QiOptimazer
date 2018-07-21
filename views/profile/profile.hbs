@@ -1,22 +1,16 @@
-
-{{#if user}}
 <h2>QiOptimizer Profile</h2>
 <br>
 <br>
 <p>See you profile's information below</p>
 <div class = "profile">
 {{user.profilePic}}
-<p>Name:{{user.name}}</p>
-<p>Email: {{user.email}}</p>
-<p>Username: {{user.username}}</p>
-<p>Location:{{user.location}}2</p>
+<p>Name:{{this.name}}</p>
+<p>Email: {{this.email}}</p>
+<p>Username: {{this.username}}</p>
+<p>Location:{{this.location}}</p>
 
 {{!-- find way for user to store what herbs and/or treatment user is using so they can keep track of it --}}
 </div>
 
-{{else}}
-<p>Log in to View your Profile</p>
-<br>
-<a href="/login"> Log In </a>
-
+ <p><a href="/profile/{{this.id}}/edit">Edit your profile</a></p>
 

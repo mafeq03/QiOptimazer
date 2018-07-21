@@ -8,17 +8,13 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const bcrypt       = require("bcrypt");
-const saltRounds   = 10;
+const User         = require('./models/user');
 const session      = require('express-session');
 const MongoStore   = require('connect-mongo')(session);
-const multer       = require('multer');
 const FbStrategy   = require('passport-facebook').Strategy;
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash         = require("connect-flash");
-const User     = require('./models/user');
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 mongoose.Promise = Promise;
 mongoose
@@ -41,7 +37,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Express View engine setup
-
 app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -65,6 +60,34 @@ passport.serializeUser((id, cb) => {
   });
 });
 
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+app.use(flash());
+passport.use(new LocalStrategy({
+  passReqToCallback: true
+  },(req, username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: "Incorrect username!!!" });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: "Incorrect password" });
+    }
+
+    return next(null, user);
+  });
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 //FB log in
@@ -84,7 +107,6 @@ passport.use(new FbStrategy({
     const newUser = new User({
       facebookID: profile.id
     });
-
     newUser.save((err) => {
       if (err) {
         return done(err);
@@ -95,6 +117,13 @@ passport.use(new FbStrategy({
 
 }));
 
+app.use((req, res, next) => {
+  // Allows request to be accessed from handlebars
+  app.locals.req = req;
+  // console.log(req.url)
+  next();
+});
+
 
 // default value for title local
 app.locals.title = 'QiOptimizer';
@@ -103,9 +132,14 @@ app.locals.title = 'QiOptimizer';
 const index = require('./routes/index');
 app.use('/', index);
 
-
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);
+
+const profileRoutes = require('./routes/profile');
+app.use('/profile', profileRoutes);
+
+const herbsRoutes = require('./routes/herbs');
+app.use('/herbs', herbsRoutes);
 
 
 
