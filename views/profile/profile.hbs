@@ -4,13 +4,13 @@
 <p>See you profile's information below</p>
 <div class = "profile">
 {{user.profilePic}}
-<p>Name:{{this.name}}</p>
-<p>Email: {{this.email}}</p>
-<p>Username: {{this.username}}</p>
-<p>Location:{{this.location}}</p>
+<p>Name:{{user.name}}</p>
+<p>Email: {{user.email}}</p>
+<p>Username: {{user.username}}</p>
+<p>Location:{{user.location}}</p>
 
 {{!-- find way for user to store what herbs and/or treatment user is using so they can keep track of it --}}
 </div>
 
- <p><a href="/profile/{{this.id}}/edit">Edit your profile</a></p>
+ <p><a href="/profile/{{user.id}}/edit">Edit your profile</a></p>
 

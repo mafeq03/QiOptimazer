@@ -1,0 +1,11 @@
+<h1>Herbs</h1>
+{{#each herbs}}
+    <p><a href="herb/{{this._id}}">{{this.name}}</a></p>
+    <a href="/herbs/edit?herb_id={{this._id}}" class="edit-button">EDIT</a>
+{{/each}}
+
+<br>
+<br>
+
+<p>Don't see something that should be listed?</p>
+<a href="/herbs/add">Add Alternative Technique</a>

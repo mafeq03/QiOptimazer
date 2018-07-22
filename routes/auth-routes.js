@@ -1,11 +1,10 @@
 const express  = require('express');
 const bcrypt   = require('bcrypt');
-//User Model 
+const bcryptSalt = 10;
 const User     = require('../models/user');
 const router   = express.Router();
 const passport = require("passport");
-// Bcrypt to encrypt passwords
-const bcryptSalt = 10;
+const ensureLogin = require("connect-ensure-login");
 const multer   = require('multer');
 
 //Facebook Login
@@ -22,7 +21,7 @@ router.get('/signup', (req, res, next) => {
     errorMessage: ''
   });
 });
-//Sign up Post Route to create User
+//Sign up Post Route to create User - receive and process information
 router.post('/signup', (req, res, next) => {
   const nameInput = req.body.name;
   const emailInput = req.body.email;
@@ -31,13 +30,14 @@ router.post('/signup', (req, res, next) => {
   const passwordInput = req.body.password;
   const profilePicInput = req.body.profilePic;
 
+  //Ensure that an email and password are being used to sign up
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/signup', {
       errorMessage: 'Enter both email and password to sign up.'
     });
     return;
   }
-
+//Makes sure that the email has not been used already 
   User.findOne({ email: emailInput }, '_id', (err, existingUser) => {
     if (err) {
       next(err);
@@ -126,7 +126,6 @@ router.get('/logout', (req, res, next) => {
     res.redirect('/logout');
   });
 });
-
 
 
 module.exports = router;

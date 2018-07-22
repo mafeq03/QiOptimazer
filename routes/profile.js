@@ -6,18 +6,28 @@ const User    = require('../models/user');
 //Route to display profile
 router.get('/:id', (req, res, next) => {
   let userId = req.params.id;
-    if(!userId){
-      return res.status(404).render('User not-found');
-    }
-    User.findById(userId)
+  User.findOne({'_id': userId})
     .then(user => {
-      if(!user){
-        return res.status(404).render('not-found');
-      }
-      res.render("profile/profile", user);
+      res.render("profile/profile", { user });
     })
-    .catch(next);  
-  });
+    .catch(error => {
+      console.log(error);
+    });
+});
+// router.get('/:id', (req, res, next) => {
+//   let userId = req.params.id;
+//     if(!userId){
+//       return res.status(404).render('User not-found');
+//     }
+//     User.findById(userId)
+//     .then(user => {
+//       if(!user){
+//         return res.status(404).render('not-found');
+//       }
+//       res.render("profile/profile", { user });
+//     })
+//     .catch(next);  
+//   });
 
 //Route to edit profile
 router.get('/:id/edit', (req, res, next) => {
@@ -35,7 +45,7 @@ router.get('/:id/edit', (req, res, next) => {
 });
 
 //Post route to edit profile
-router.post
+
 
 //Route to delete profile
 

@@ -1,14 +1,14 @@
 const express = require('express');
 const router  = express.Router();
 const multer  = require('multer');
-const Other  = require('../models/others');
+const Other  = require('../models/other.js');
 
 
 //Route to show techniques
-router.get('/techniques', (req, res, next) => {
+router.get('/', (req, res, next) => {
   Other.find()
     .then(others => {
-      console.log(others);
+       // console.log('==========',others);
       res.render("techniques/techniques", { others });
     })
     .catch(error => {
@@ -19,29 +19,24 @@ router.get('/techniques', (req, res, next) => {
 //how can i limit the edit function to just administrator?
 
 //Route to show deatils of one technique
-router.get('/technique/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   let otherId = req.params.id;
-  if (!/^[0-9a-fA-F]{24}$/.test(otherId)) { 
-    return res.status(404).render('not-found');
-  }
   Other.findOne({'_id': otherId})
-    
     .then(other => {
-      if (!other) {
-          return res.status(404).render('not-found');
-      }
-      res.render("techniques-detail", { other });
+      res.render("techniques/techniques-detail", { other });
     })
-    .catch(next);
+    .catch(error => {
+      console.log(error);
+    });
 });
 
 //Route to add technique - GET to call the edit form
-router.get('/techniques/add', (req, res, next) => {
+router.get('/add', (req, res, next) => {
   res.render("techniques/tecniques-add");
 });
 
 //Route to add techniques - POST to submit the form
-router.post('/techniques/add', (req, res, next) => {
+router.post('/add', (req, res, next) => {
   const { name, description, image, symptoms, reviews } = req.body;
   const newOther= new Other({ name, description, image, symptoms, reviews});
   newOther.save()
@@ -54,7 +49,7 @@ router.post('/techniques/add', (req, res, next) => {
 });
 
 //Route to Edit techniques - only for admin
-router.get('/techniques/edit', (req, res, next) => {
+router.get('/:id/edit', (req, res, next) => {
   Other.findOne({_id: req.query.other_id})
   .then((other) => {
     res.render("techniques/technique-edit", {technique});

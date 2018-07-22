@@ -2,6 +2,8 @@ const express = require('express');
 const router  = express.Router();
 const multer  = require('multer');
 const User    = require('../models/user');
+const Other  = require('../models/other.js');
+
 /* GET home page */
 router.get('/', (req, res, next) => {
   res.render('index');
@@ -19,15 +21,8 @@ router.get('/welcome', (req, res, next) => {
 
 //Route to display essential information
 router.get('/basics', (req, res, next) => {
-  res.render('/views/concepts/basics.hbs');
-})
-//Route to display Herbs
-router.get('/herbs', (req, res, next) => {
-  res.render('/views/concepts/herbs.hbs');
-})
-//Route to display other Treatments
-router.get('/other-techniques', (req, res, next) => {
-  res.render('/views/concepts/techniques.hbs');
-})
+  res.render('concepts/basics');
+});
+
 
 module.exports = router;

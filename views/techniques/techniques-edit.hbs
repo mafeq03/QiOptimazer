@@ -1,20 +1,19 @@
-<h2>Share your knowledge</h2>
-<h3>Add a new healing technique</h3>
+<h2>Edit Technique Information</h2>
 
-<form action="/techniques/add" method="post">
+<form action="/techniques/edit?other_id={{other._id}}" method="post">
   <label for="">Name:</label>
-  <input type="text" name="name">
+  <input type="text" name="title" value="{{other.title}}">
 
   <label for="">Description:</label>
-  <input type="text" name="description">
+  <input type="text" name="description" value="{{other.description}}">
 
   <label for="image">Image</label>
-  <input type="file" name="image" id="techpic"> 
+  <input type="file" name="image" value="{{other.image}}">
 
   <label for="">Symptoms:</label>
-  <input type="text" name="symptoms">
+  <input type="text" name="symptoms" value="{{other.symptoms}">
 
 
-  <button type="submit">ADD</button>
-  
+
+  <button type="submit">EDIT</button>
 </form>

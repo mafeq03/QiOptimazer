@@ -1,0 +1,19 @@
+<h2>Edit your Profile</h2>
+
+<form action="/profile/edit?user_id={{user._id}}" method="post">
+  <label for="">Name:</label>
+  <input type="text" name="name" value="{{user.name}}">
+
+  <label for="">Email:</label>
+  <input type="text" name="email" value="{{user.email}}">
+
+  <label for="image">profilePic</label>
+  <input type="file" name="profilePic" value="{{user.image}}">
+
+  <label for="">Location:</label>
+  <input type="text" name="location" value="{{user.location}}">
+
+
+
+  <button type="submit">EDIT</button>
+</form>

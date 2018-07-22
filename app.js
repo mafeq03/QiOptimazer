@@ -141,6 +141,7 @@ app.use('/profile', profileRoutes);
 const herbsRoutes = require('./routes/herbs');
 app.use('/herbs', herbsRoutes);
 
-
+const techniquesRoutes = require('./routes/techniques');
+app.use('/techniques', techniquesRoutes);
 
 module.exports = app;

@@ -1,20 +1,20 @@
-<h1>{{this.name}}</h1>
+<h1>{{other.name}}</h1>
 
 <div id="tech_pic">
-  {{this.image}}
+  {{other.image}}
 </div>
 <div id="tech_info">
 <b>Description:</b>
-<p>{{this.description}}</p>
+<p>{{other.description}}</p>
 <b>What it can cure:</b>
-<p>{{this.symptoms}}</p>
+<p>{{other.symptoms}}</p>
 </div>
 
 <h3>Reviews</h3>
 {{#each other.reviews}}
 <div class="tech-review">
-  <p>{{this.comments}}</p>
-  <span>{{this.user}}</span>
+  <p>{{other.comments}}</p>
+  <span>{{other.user}}</span>
 </div>
 {{/each}}
 
