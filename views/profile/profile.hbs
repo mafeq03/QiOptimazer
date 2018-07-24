@@ -2,15 +2,53 @@
 <br>
 <br>
 <p>See you profile's information below</p>
+
+
 <div class = "profile">
-{{user.profilePic}}
+<img src ="{{user.profilePic}}">
 <p>Name:{{user.name}}</p>
 <p>Email: {{user.email}}</p>
 <p>Username: {{user.username}}</p>
 <p>Location:{{user.location}}</p>
-
 {{!-- find way for user to store what herbs and/or treatment user is using so they can keep track of it --}}
 </div>
 
- <p><a href="/profile/{{user.id}}/edit">Edit your profile</a></p>
+
+
+<h4>Currently following these treatments</h4>
+
+
+{{#each user.treatments}}
+<div class="user-treatments">
+   <span>Name: {{name}}</span>
+  <p>Date when you begun: {{date}}</p>
+  <p>How many times a day: {{time}}</p>
+  <p>Comments: {{comments}}</p>
+</div>
+{{/each}}
+
+<h3>Add it here</h3>
+<form action="/profile/treatments/add?user_id={{user._id}}" method="post">
+  <label for="">Type:</label>
+  <input type="text" name="name">
+  <div>
+    <label for="date-input">
+      When did you begin?
+    </label>
+    <input type="date" name="date" id="date-input">
+  </div>
+  <label for="">How many times a day?</label>
+  <textarea type="number" name="time"></textarea>
+  <label for="">Tell us your experience:</label>
+  <textarea type="text" name="comments"></textarea>
+
+  <button type="submit">ADD</button>
+</form>
+
+
+ <p><a href="/profile/{{user.id}}/edit">Edit your Profile</a></p>
+ <br>
+ <p><a href="/profile/{{user.id}}/delete">Delete your Profile</a></p>
+ <br>
+ <p><a href="/welcome">Dashboard</a></p>
 

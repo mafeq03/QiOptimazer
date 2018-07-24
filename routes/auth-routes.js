@@ -2,131 +2,97 @@ const express  = require('express');
 const bcrypt   = require('bcrypt');
 const bcryptSalt = 10;
 const User     = require('../models/user');
-const router   = express.Router();
+const authRoutes   = express.Router();
 const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
 const multer   = require('multer');
+const path       = require('path');
 
-//Facebook Login
-router.get("/auth/facebook", passport.authenticate("facebook"));
-router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/welcome",
-  failureRedirect: "/"
-}));
+//Singup and Log in Routes using passport 
 
-//Route to signup
-//Display the Signup Form
-router.get('/signup', (req, res, next) => {
-  res.render('auth/signup', {
-    errorMessage: ''
-  });
+//Signup route - show form to sign up
+authRoutes.get("/signup", (req, res, next) => {
+  res.render("auth/signup");
 });
-//Sign up Post Route to create User - receive and process information
-router.post('/signup', (req, res, next) => {
-  const nameInput = req.body.name;
-  const emailInput = req.body.email;
-  const usernameInput = req.body.username;
-  const locationInput = req.body.location;
-  const passwordInput = req.body.password;
-  const profilePicInput = req.body.profilePic;
-
-  //Ensure that an email and password are being used to sign up
-  if (emailInput === '' || passwordInput === '') {
-    res.render('auth/signup', {
-      errorMessage: 'Enter both email and password to sign up.'
-    });
+//sends information to MongoDB - Creates User
+authRoutes.post("/signup", (req, res, next) => {
+  const {
+    name,
+    email,
+    username,
+    password,
+    location, 
+    profilePic
+  } = req.body;
+//requires both UN and Pass to create profile
+  if (username === "" || password === "") {
+    res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }
-//Makes sure that the email has not been used already 
-  User.findOne({ email: emailInput }, '_id', (err, existingUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    if (existingUser !== null) {
-      res.render('auth/signup', {
-        errorMessage: `The email ${emailInput} is already in use.`
-      });
-      return;
-    }
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashedPass = bcrypt.hashSync(passwordInput, salt);
-
-    const newUser = new User({
-      name: nameInput,
-      email: emailInput,
-      username: usernameInput,
-      location: locationInput,
-      password: hashedPass,
-      profilePic: profilePicInput
-    });
-
-    newUser.save((err) => {
-      if (err) {
-        res.render('auth/signup', {
-          errorMessage: 'Something went wrong. Try again later.'
-        });
+//ensure email is not being used
+  User.findOne({ email })
+    .then(user => {
+      if (user !== null) {
+        res.render("auth/signup", { message: "The email is already being used" });
         return;
       }
-      res.redirect('/login');
-    });
-  });
-});
-
-//Route to log in and redirect to welcome page
-router.get('/login', (req, res, next) => {
-   res.render('auth/login', {
-    errorMessage: 'Incorrect username or password'
-  });
-});
-//Post route to log in and create session
-router.post('/login', (req, res, next) => {
-  const emailInput = req.body.email;
-  const passwordInput = req.body.password;
-
-  if (emailInput === '' || passwordInput === '') {
-    res.render('auth/login', {
-      errorMessage: 'Enter both email and password to log in.'
-    });
-    return;
-  }
-
-  User.findOne({ email: emailInput }, (err, theUser) => {
-    if (err || theUser === null) {
-      res.render('auth/login', {
-        errorMessage: `There isn't an account with email ${emailInput}.`
+//used to encrypt password
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
+//creates new user
+      const newUser = new User({
+        name,
+        email,
+        username,
+        password: hashPass,
+        location, 
+        profilePic
       });
-      return;
-    }
 
-    if (!bcrypt.compareSync(passwordInput, theUser.password)) {
-      res.render('auth/login', {
-        errorMessage: 'Invalid password or username.'
+      newUser.save(err => {
+        if (err) {
+          res.render("auth/signup", { message: "Something went wrong" });
+        } else {
+          res.redirect("/login");
+        }
       });
-      return;
-    }
-    // req.session.currentUser = theUser;
-    //once logged in it takes you to welcome page
-    res.redirect('/welcome');
-  });
+    })
+    .catch(error => {
+      next(error);
+    });
 });
 
-//Route to logout
-router.get('/logout', (req, res, next) => {
-   if (!req.session.currentUser) {
-     //Logout page 
-    res.redirect('/logout');
-    return;
-  }
-  req.session.destroy((err) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.redirect('/logout');
-  });
+//Login Route
+authRoutes.get("/login", (req, res, next) => {
+  res.render("auth/login", { "message": req.flash("error") });
+});
+
+authRoutes.post("/login", passport.authenticate("local", {
+  successRedirect: "/welcome",
+  successFlash: true, 
+  failureRedirect: "/",
+  failureFlash: true,
+  passReqToCallback: true
+}));
+
+
+
+//Log in with FB
+authRoutes.get("/auth/facebook", passport.authenticate("facebook"));
+authRoutes.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/welcome",
+    failureRedirect: "/"
+  })
+);
+
+//Logout Route
+authRoutes.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/logout");
 });
 
 
-module.exports = router;
 
+module.exports = authRoutes;

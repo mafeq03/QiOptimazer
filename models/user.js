@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema ({
   name: String,
-  email: String, 
+  email: String,  
   username: String,
   password: String,
   location: String,
@@ -15,7 +15,15 @@ const userSchema = new Schema ({
    role: {
     type: String,
     enum: ['User', 'Admin', 'Expert']
-  }
+  },
+  treatments:[
+    {
+      name: String, 
+      date: Date,
+      time: Number,
+      comments: String
+    }
+  ]
 });
 
 const User = mongoose.model('User', userSchema);

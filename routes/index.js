@@ -16,8 +16,18 @@ router.get('/logout', (req, res, next) => {
 
 //Route to display Welcome Page
 router.get('/welcome', (req, res, next) => {
-  res.render('initial/welcome-page');
-});
+  User.findById(req.session.passport.user)
+  .then(user => {
+   if (!user) {
+       return res.status(404).render('not-found');
+   }
+   res.render("initial/welcome-page", { user });
+ })
+ .catch(err => {
+  console.log('There is an error', err);
+  next();
+ });
+  });
 
 //Route to display essential information
 router.get('/basics', (req, res, next) => {

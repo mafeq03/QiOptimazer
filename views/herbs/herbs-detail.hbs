@@ -1,7 +1,7 @@
 <h1>{{herb.name}}</h1>
 
 <div id="herb_pic">
-  {{herb.image}}
+ <img src= "{{herb.image}}">
 </div>
 <div id="herb_info">
 <b>Description:</b>
@@ -13,13 +13,13 @@
 <h3>Reviews</h3>
 {{#each herb.reviews}}
 <div class="herb-review">
-  <p>{{herb.comments}}</p>
-  <span>{{herb.user}}</span>
+  <p>{{comments}}</p>
+  <span>{{user}}</span>
 </div>
 {{/each}}
 
 <h4>Add a review</h4>
-<form action="/reviews/add?herb_id={{herb._id}}" method="post">
+<form action="/herbs/reviews/add?herb_id={{herb._id}}" method="post">
   <label for="">User:</label>
   <input type="text" name="user">
 

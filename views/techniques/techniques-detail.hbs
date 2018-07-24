@@ -1,7 +1,7 @@
 <h1>{{other.name}}</h1>
 
 <div id="tech_pic">
-  {{other.image}}
+  <img src= "{{other.image}}">
 </div>
 <div id="tech_info">
 <b>Description:</b>
@@ -13,13 +13,13 @@
 <h3>Reviews</h3>
 {{#each other.reviews}}
 <div class="tech-review">
-  <p>{{other.comments}}</p>
-  <span>{{other.user}}</span>
+  <p>{{comments}}</p>
+  <span>{{user}}</span>
 </div>
 {{/each}}
 
 <h4>Add a review</h4>
-<form action="/reviews/add?other_id={{other._id}}" method="post">
+<form action="/techniques/reviews/add?other_id={{other._id}}" method="post">
   <label for="">User:</label>
   <input type="text" name="user">
 
@@ -29,6 +29,22 @@
   <button type="submit">ADD</button>
 </form>
 
+<h3>Add it to my Treatments</h3>
+<form action="/profile/treatments/add?user_id={{user}}" method="post">
+  <label for="">Type:</label>
+  <input type="text" name="name" value ="{{other.name}}">
+  <div>
+    <label for="date-input">
+      When did you begin?
+    </label>
+    <input type="date" name="date" id="date-input">
+  </div>
+  <label for="">How many times a day?</label>
+  <textarea type="number" name="time"></textarea>
+  <label for="">Tell us your experience:</label>
+  <textarea type="text" name="comments"></textarea>
 
+  <button type="submit">ADD</button>
+</form>
 
 <a href="/welcome">Return</a>
