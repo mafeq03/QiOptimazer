@@ -24,7 +24,8 @@ router.get('/:id', (req, res, next) => {
   let herbId = req.params.id;
   Herb.findOne({'_id': herbId})
     .then(herb => {
-      res.render("herbs/herbs-detail", { herb });
+      let user = req.session.passport.user;
+      res.render("herbs/herbs-detail", { herb, user });
     })
     .catch(error => {
       console.log(error);
