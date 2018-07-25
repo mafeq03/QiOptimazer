@@ -2,7 +2,6 @@ const express = require('express');
 const router  = express.Router();
 const multer  = require('multer');
 const User    = require('../models/user');
-const Other  = require('../models/other.js');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
