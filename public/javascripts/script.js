@@ -17,6 +17,7 @@ function startMap() {
     }
   );
 }
+var google;
 
 const myMarker = new google.maps.Marker({
   position: {
