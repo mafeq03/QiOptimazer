@@ -1,8 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose    = require('mongoose');
+require('dotenv').config();
+
+mongoose.connect(process.env.MONGODB_URI);
+
+
 const Herb = require('../models/herbs');
 
-const dbName = 'qioptimizer';
-mongoose.connect(`mongodb://localhost/${dbName}`, {useMongoClient: true});
+// const dbName = 'qioptimizer';
+// mongoose.connect(`mongodb://localhost/${dbName}`, {useMongoClient: true});
 
 // Herb.collection.drop();
 
