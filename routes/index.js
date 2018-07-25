@@ -34,5 +34,12 @@ router.get('/basics', (req, res, next) => {
   res.render('concepts/basics');
 });
 
+//Route to display map to search specialist near you
+router.get('/tcm-nearyou', (req, res, next) => {
+  res.render('initial/map-search');
+});
+
+
+
 
 module.exports = router;

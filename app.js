@@ -1,3 +1,4 @@
+//For environment settings
 require('dotenv').config();
 
 const bodyParser   = require('body-parser');
@@ -11,7 +12,7 @@ const User         = require('./models/user');
 const session      = require('express-session');
 const MongoStore   = require('connect-mongo')(session);
 const flash        = require("connect-flash");
-const bcrypt       = require('bcrypt');
+const bcrypt       = require('bcryptjs');
 
 const FbStrategy   = require('passport-facebook').Strategy;
 const passport     = require("passport");

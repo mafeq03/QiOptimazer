@@ -1,10 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-  console.log('IronGenerator JS imported successfully!');
-
-}, false);
-
-// main.js
 function startMap() {
   const ironhackBCN = {
   	lat: 41.3977381,
@@ -55,38 +48,12 @@ function startMap() {
 
   // Store Ironhack's coordinates
   const ironhackBCN = { lat: 41.3977381,  lng: 2.190471916 };
-  const directionsService = new google.maps.DirectionsService;
-  const directionsDisplay = new google.maps.DirectionsRenderer;
-
 
   // Map initialization
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: ironhackBCN
   });
-
-//get directions 
-  const directionRequest = {
-    origin: { lat: 41.3977381, lng: 2.190471916},
-    destination: 'Madrid, es',
-    travelMode: 'DRIVING'
-  };
-  
-  directionsService.route(
-    directionRequest,
-    function(response, status) {
-      if (status === 'OK') {
-        // everything is ok
-        directionsDisplay.setDirections(response);
-  
-      } else {
-        // something went wrong
-        window.alert('Directions request failed due to ' + status);
-      }
-    }
-  );
-  
-  directionsDisplay.setMap(map);
 
   // Add a marker for Ironhack Barcelona
   const IronHackBCNMarker = new google.maps.Marker({

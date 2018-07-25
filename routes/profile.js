@@ -3,7 +3,7 @@ const router  = express.Router();
 const User    = require('../models/user');
 const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const bcryptSalt     = 10;
 
 // Function to check if user is logged in - must be logged in to view profile and edit it or delete it 
