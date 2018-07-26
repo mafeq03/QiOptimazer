@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
-const Other = require('../models/other');
+const mongoose    = require('mongoose');
+require('dotenv').config();
 
-const dbName = 'qioptimizer';
-mongoose.connect(`mongodb://localhost/${dbName}`, {useMongoClient: true});
+mongoose.connect(process.env.MONGOLAB_GOLD_URI, {useMongoClient: true});
+
+const Other = require('../models/other');
 
 const others = [
  { name: 'Acupuncture',
