@@ -34,6 +34,24 @@
   <label for="">Type:</label>
   <input type="text" name="name" value ="{{herb.name}}">
   <div>
+    <label for="date_start-input">
+      When did you begin?
+    </label>
+    <input type="date" name="date" id="date_start-input">
+  </div>
+  <label for="">How many times a day?</label>
+  <textarea type="number" name="time"></textarea>
+   <label for="">For how long?</label>
+  <textarea type="text" name="duration"></textarea>
+  <label for="">Your experience:</label>
+  <textarea type="text" name="comments"></textarea>
+
+
+
+<form action="/profile/treatments/add?user_id={{user}}" method="post">
+  <label for="">Type:</label>
+  <input type="text" name="name" value ="{{herb.name}}">
+  <div>
     <label for="date-input">
       When did you begin?
     </label>

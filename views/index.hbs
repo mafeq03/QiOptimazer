@@ -1,79 +1,140 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3bd6a8;" id="nav-bar">
-  <a class="navbar-brand" href="#">
-    <b>QiOptimizer</b>
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
-    aria-expanded="false" aria-label="Toggle navigation">
+{{!-- Index Page --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Complete Bootstrap 4 Website Layout</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top" style="background-color: #70334b"> 
+<div class="container-fluid">
+ 
+  <a class="navbar-brand" href="/home"><img src ="/images/logo.png" height=50></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor05">
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home
-          <span class="sr-only">(current)</span>
-        </a>
+      <a class="nav-link" href="/login">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/signup"> Sign Up </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login"> Log In</a>
+        <a class="nav-link" href="/signup">Sign Up</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/auth/facebook">Login With Facebook</a>
+   
       </li>
     </ul>
   </div>
+</div>
 </nav>
-<blockquote class="blockquote text-center">
 
-
-  <h1>{{title}}</h1>
-  <br>
-  <p class="slogan">Welcome to {{title}} an ancient alternative for modern ailments</p>
-</blockquote>
-
-
-<br>
-<br>
-<div class="row">
-  <div class="col-md-6">
-    <img src="/images/happygroup.jpg" class="img-rounded" width="600" height="300">
-    <h4>
-      <b>Who are we?</b>
-    </h4>
-    <p>QiOptimizer is a growing community of individuals using Tradicional Chinese Medicine to enhace their lives</p>
-  </div>
-  <div class="col-md-6">
-    <img src="/images/traditional-chinese-medicine-title-921b41.jpg" class="img-rounded" width="600" height="300">
-    <h4>
-      <b>What is Traditional Chinese Medicine?</b>
-    </h4>
-    <p>It’s a timeless bridge that can initiate and support change and growth in any and every life dimension: physical, mental,
+<!--- Image Slider -->
+<div id="slides" class="carousel slide" data-ride="carousel">
+<ul class="carousel-indicators">
+    <li data-target="#slides" data-slide-to="0" class="active"></li>   
+    <li data-target="#slides" data-slide-to="1"></li>
+    <li data-target="#slides" data-slide-to="2"></li>
+    <li data-target="#slides" data-slide-to="3"></li>
+</ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="/images/healing.jpg" alt="First slide">
+      <div class ="carousel-caption">
+        <h1 class="display-2"><b>Who are we?</b></h1>
+    <h2>QiOptimizer is a growing community of individuals using Tradicional Chinese Medicine to enhace their lives</h>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/images/tcm.jpg" alt="Second slide">
+     <div class ="carousel-caption">
+        <h1 class="display-2"><b>What is Traditional Chinese Medicine?</b></h1>
+    <h2>It’s a timeless bridge that can initiate and support change and growth in any and every life dimension: physical, mental,
       emotional, and spiritual. It’s a medicine of extraordinary relationships. Every TCM principle, theory, and healing
       practice reflects and harmonizes with the relationships that exist within natural law. TCM teaches you how to live
-      a life of balance, wellness, and harmony. </p>
+      a life of balance, wellness, and harmony.</h2>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/images/qi.jpg" alt="Third slide">
+     <div class ="carousel-caption">
+        <h1 class="display-2"><b>What is Qi?</b></h1>
+    <h2>Qi is energy in the very broadest sense possible, it is universal, it embraces all manifestations of energy, most material
+      aspects of energy (such as the earth beneath your feet, your computer, and flesh and blood) to the most immaterial
+      aspects (light, movement, heat, nerve impulses, thought, and emotion).</h2>
+      </div>
+    </div>
+       <div class="carousel-item">
+      <img class="d-block w-100" src="/images/yin_yang_hands.jpg" alt="Frouth slide">
+     <div class ="carousel-caption">
+        <h1 class="display-2"><b>Why Optimize Qi?</b></h>
+    <h2>Qi relates to both substance and function, Qi is in a state of continuous flux, transforming endlessly from one aspect
+      of Qi into another. It is neither created nor is it ever destroyed for this reason its optimizations allow for overall
+      good health.</h2>
+      </div>
+    </div>
+</div>
+  <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<!--- Jumbotron -->
+<div class="container-fluid">
+  <div class ="row jumbotron">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+      <p class="lead">Web hosting</p>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-6">
-    <img src="/images/CHI-ENERGY-DIVINE-LIFE-FORCE1.jpg" class="img-rounded" width="600" height="300">
-    <h4>
-      <b>What is Qi?</b>
-    </h4>
-    <p>Qi is energy in the very broadest sense possible, it is universal, it embraces all manifestations of energy, most material
-      aspects of energy (such as the earth beneath your feet, your computer, and flesh and blood) to the most immaterial
-      aspects (light, movement, heat, nerve impulses, thought, and emotion). </p>
-  </div>
-  <div class="col-md-6">
-    <img src="/images/590x300 Yin_Yang_Galaxy_Loop.jpg" class="img-rounded" width="600" height="300">
-    <h4>
-      <b>Why Optimize Qi?</b>
-    </h4>
-    <p>Qi relates to both substance and function, Qi is in a state of continuous flux, transforming endlessly from one aspect
-      of Qi into another. It is neither created nor is it ever destroyed for this reason its optimizations allow for overall
-      good health.</p>
-  </div>
-</div>
+<!--- Welcome Section -->
+
+
+<!--- Three Column Section -->
+
+
+<!--- Two Column Section -->
+
+
+<!--- Fixed background -->
+
+
+<!--- Emoji Section -->
+
+  
+<!--- Meet the team -->
+
+
+<!--- Cards -->
+
+
+<!--- Two Column Section -->
+
+
+<!--- Connect -->
+
+
+<!--- Footer -->
+
+
+</body>
+</html>
+
+

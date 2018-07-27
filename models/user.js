@@ -19,8 +19,9 @@ const userSchema = new Schema ({
   treatments:[
     {
       name: String, 
-      date: Date,
+      date_start: String,
       time: Number,
+      duration: String,
       comments: String
     }
   ]
