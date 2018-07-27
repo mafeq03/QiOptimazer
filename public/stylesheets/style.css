@@ -1,13 +1,66 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,700");
-.carousel-caption {
-  top: 30%;
-  bottom: auto; }
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  color: #222; }
 
 .navbar {
-  margin-bottom: 0px !important; }
+  margin-bottom: 0px !important;
+  padding: .8rem; }
+
+.navbar-nav li {
+  font-family: "Poppins", sans-serif;
+  padding-right: 20px;
+  font-size: 16px; }
+
+.carousel-inner img {
+  width: 100%;
+  height: 100%; }
+
+.carousel-caption {
+  font-family: "Poppins", sans-serif; }
+
+.carousel-caption h1 {
+  font-size: 600%;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 10px #000; }
+
+.carousel-caption h2 {
+  font-size: 200%;
+  font-weight: 200;
+  text-shadow: 1px 1px 10px #000; }
+
+.social a {
+  font-size: 4.5em;
+  padding: 3rem; }
+
+.fa-facebook {
+  color: #3b5998; }
+
+.fa-twitter {
+  color: #00aced; }
+
+.fa-google-plus-g {
+  color: #dd4b39; }
+
+.fa-instagram {
+  color: #517fa8; }
+
+.fa-youtube {
+  color: #bb0000; }
+
+footer {
+  color: white;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif; }
 
 .carousel-caption {
   margin-top: 0px !important; }
+
+.carousel-caption {
+  top: 30%;
+  bottom: auto; }
 
 /*---Media Queries --*/
 /*---Firefox Bug Fix --*/
