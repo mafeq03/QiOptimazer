@@ -2,23 +2,29 @@
 {{!-- input information about succesfully logging in; 
 in essence this should be the main menu --}}
 
-<h2>Welcome {{user.name}} </h2> 
+<body class="welcome">   
+    <div class="welcome_bg">
+
 
 {{!-- can be changed to a nice image ^ --}}
 
-<p>Thank you for joining our community</p>
 
 
-<a href="/basics">Learn the basics</a>
-<br>
-<br>
-<a href="/techniques">Search for Treatments</a>
-<br>
-<br>
-<a href="/herbs">Herbs and Supplements</a>
-<br>
-<br>
-<a href="/profile/{{user._id}}">My Profile</a>
-<br>
-<br>
-<a href="/logout"> Log Out </a>
+  <section id="hero">
+    <div class="hero-container">
+      <h1>Welcome {{user.name}} </h1>
+      <h2>Thank you for joining our community</h2>
+      <a href="/basics" class="btn-get-started">Learn the basics</a>
+      <a href="/techniques" class="btn-get-started">Treatments</a>
+      <a href="/herbs" class="btn-get-started">Herbal Remedies</a>
+      <a href="/profile/{{user._id}}" class="btn-get-started">My Profile</a>
+    </div>
+  </section><!-- #hero -->
+
+  <main id="main">
+
+
+</div>
+</body>
+
+

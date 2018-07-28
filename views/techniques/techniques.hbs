@@ -1,10 +1,15 @@
-<h1>Other Healing Techniques</h1>
+<h1 class="display-3">Other Healing Techniques</h1>
 {{#each others}}
-    <p><a href="techniques/{{this._id}}">{{this.name}}</a></p>
-    <a href="/techniques/edit?other_id={{this._id}}" class="edit-button">EDIT</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><h3><a href="techniques/{{this._id}}">{{this.name}}</a> <a href="/techniques/edit?other_id={{this._id}}" class="edit-button">EDIT</a></h3></th>
+      <th scope="col">   </th>
+         </tr>
+  </thead>
 {{/each}}
-<br>
-<br>
 
+<div class="add-herbs">
 <p>Don't see something that should be listed?</p>
 <a href="/techniques/add">Add Alternative Technique</a>
+</div>

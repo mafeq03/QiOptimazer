@@ -1,11 +1,16 @@
-<h1>Herbs</h1>
+<h1 class="display-2">Herbs</h1>
 {{#each herbs}}
-    <p><a href="herbs/{{this._id}}">{{this.name}}</a></p>
-    <a href="/herbs/edit?herb_id={{this._id}}" class="edit-button">EDIT</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><h3><a href="herbs/{{this._id}}">{{this.name}}</a>  <a href="/herbs/edit?herb_id={{this._id}}" class="btn btn-info">EDIT</a> </h3></th>
+      <th scope="col">   </th>
+         </tr>
+  </thead>
 {{/each}}
 
-<br>
-<br>
-
+<div class="add-herbs">
 <p>Don't see something that should be listed?</p>
 <a href="/herbs/add">Add a New Herb</a>
+</div>
+
