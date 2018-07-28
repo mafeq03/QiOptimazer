@@ -1,54 +1,53 @@
-<h2>{{title}}</h2>
+<body class="signupbody">   
+    <div class="signup_bg">
 
-<p>Welcome, we hope to help you find an alternative way of living</p>
-
-{{#if errorMessage}}
-  <p class="error-message">
-    {{ errorMessage }}
-  </p>
-{{/if}}
-
-<!-- Default form register -->
-<form action="/signup" method="post" class="text-center border border-light p-5">
-
-    <p class="h4 mb-4"><h1>Sign up</h1></p>
-
-    <div class="form-row mb-4">
-        <div class="col">
-            <!-- First name -->
-        <input type="text" name="name" id="name-input" class="form-control" placeholder="Your name">
-        </div>
-        <div class="col">
-            <!-- Username -->
-            <input  type="text" name="username" id="username-input"  class="form-control" placeholder="User Name">
+     <div class="row">
+        <div class="col-sm-11 col-sm-offset-1 hid">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-4 text-center">
+                  <img src="/images/logo2.png">
+                  <h4 class="bg-info text-white">Welcome, we hope you find an alternative way of living</h4>
+ 
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- E-mail -->
-    <input type="email" name="email" id="email-input" class="form-control mb-4" placeholder="E-mail">
 
-    <!-- Password -->
-    <input  type="password" name="password" id="password-input" class="form-control" placeholder="Password">
-   <br>
-    <!-- Location -->
-    <input type="text" name="location" id="location-input" class="form-control" placeholder="Your location">
-   
-<br>     
-<div class="col">
-   <label for="picture"> Profile Picture</label>
-    <input type="file" name="photo" id="profilepic"> 
+
+
+{{#if errorMessage}}
+<p class="error-message">
+    {{ errorMessage }}
+</p>
+{{/if}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+                       <div class="account-wall">
+                           <h1 class="text-center login-title"><b>Sign up</b></h1>
+                <img class="profile-img" src="/images/cats.jpg" alt="">
+                <form class="form-signin" action="/signup" method="post">
+                 
+                    <label for="name-input"> Name </label>
+                    <input type="text" name="name" id="name-input" class="form-control" placeholder="Your name">
+                    <label for="email-input"> Email </label>
+                    <input type="email" name="email" id="email-input" class="form-control" placeholder="Your email">
+                    <label for="username"> Username </label>
+                    <input type="text" name="username" id="username-input" class="form-control" placeholder="Get Creative">
+                    <label for="password-input"> Password </label>
+                    <input type="password" name="password" id="password-input" class="form-control" placeholder="Your secret code">
+
+                    <label for="location"> Location </label>
+                    <input type="text" name="location" id="location-input" class="form-control" placeholder="Where are you located?">
+
+                    <label for="picture"> Profile Picture</label>
+                    <input type="file" name="photo" id="profilepic">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Sign Up</button>
+
+                </form>
+            </div>
 </div>
-
-<!-- Sign up button -->
-    <button class="btn btn-info my-4 btn-block" type="submit">Create New Account</button>
-
-<br>
-    <!-- Terms of service -->
-    <p>By clicking
-        <em>Sign up</em> you agree to our
-        <a href="" target="_blank">terms of service</a> and
-        <a href="" target="_blank">terms of service</a>. </p>
-
-</form>
-
-
+</body>
